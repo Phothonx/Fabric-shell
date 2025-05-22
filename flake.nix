@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs";
-    fabric.url = "https://github.com/Fabric-Development/fabric";
+    fabric.url = "github:Fabric-Development/fabric";
     fabric.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -11,7 +11,7 @@
     self,
     nixpkgs,
     ...
-  }: let
+  } @ inputs: let
     lib = nixpkgs.lib;
 
     systems = ["x86_64-linux"];
@@ -27,22 +27,7 @@
     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
     devShells = forEachSystem (pkgs: {
-      default = pkgs.mkShell {
-        # if package not in nixpkgs: https://github.com/nix-community/pip2nix
-        # ex: nix run github:nix-community/pip2nix -- generate
-        # or directly builPythonPackage
-        venvDir = ".venv";
-        packages = [
-          (pkgs.python3.withPackages (p:
-            with p; [
-              # ex:
-              # matplotlib
-              # scipy
-              # requests
-              # jupyter
-            ]))
-        ];
-      };
+      default = inputs.fabric.devShells.${pkgs.system}.default;
     });
   };
 }
