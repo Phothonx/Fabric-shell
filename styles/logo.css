@@ -1,0 +1,58 @@
+#logo {
+  background-color: #000000;
+  border: none;
+  border-radius: 20px;
+  padding: 0.4rem;
+  margin: 0.3rem 0 0 0;
+}
+
+#logo:hover {
+  background-color: #1a1a1a;
+}
+
+#logo > image {
+  background-color: transparent;
+}
+#app-launcher {
+  background-color: #000000;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+#app-launcher entry {
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  color: #ffffff;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#app-launcher button {
+  background-color: #222222;
+  border: none;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+#app-launcher button:hover {
+  background-color: #333333;
+}
+
+#app-launcher button.selected {
+  background-color: #7287fd;
+  color: #ffffff;
+}
+
+#app-launcher button image {
+  background-color: transparent;
+  margin-right: 10px;
+}
+
+#app-launcher box {
+  padding: 5px;
+}
