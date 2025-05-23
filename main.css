@@ -1,0 +1,10 @@
+* {
+  all: unset;
+  color: white;
+  font-size: 14pt;
+  border-radius: 16px;
+}
+
+@import url("./styles/bar.css");
+@import url("./styles/workspaces.css");
+@import url("./styles/datetime.css");

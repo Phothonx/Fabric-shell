@@ -1,10 +1,12 @@
 import fabric
-from fabric.widgets.wayland import WaylandWindow as Window
 
+from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
 
-from fabric.hyprland.widgets import Workspaces, WorkspaceButton
+from modules.controls import VolumeSlider
+from modules.datetime import dateTime
+from modules.workspaces import workspaces
 
 class Bar(Window):
   def __init__(self, **kwargs):
@@ -18,24 +20,42 @@ class Bar(Window):
       **kwargs
     )
 
-    self.workspaces = Workspaces(
-      buttons = [ WorkspaceButton(id=i, label=str(i)) for i in range(1, 10) ],
-      empty_scroll=True,
-    )
+    self.workspaces = workspaces()
+    self.volume_slider = VolumeSlider()
+    self.date_time = dateTime()
+
+    self.left_widgets = [
+      self.workspaces
+    ]
+    self.center_widgets = [
+
+    ]
+    self.righ_widgets = [
+      self.date_time,
+      self.volume_slider
+    ]
 
     self.bar_inner = CenterBox(
-      name = "bar_inner",
-      h_align="fill",
-      v_align="fill",
+      name = "bar-inner",
       start_children = Box(
+        name = "start-container",
+        children = self.left_widgets
+      ),
+      center_children = Box(
+        name = "center-container",
         children = [
-          self.workspaces
+          Box(name="left-inverted-corner"),
+          Box(
+            name = "center-box",
+            children = self.center_widgets
+          ),
+          Box(name="right-inverted-corner")
         ]
       ),
-      center_children = None,
-      end_children = None,
+      end_children = Box(
+        name = "end-container",
+        children = self.righ_widgets
+      ),
     )
 
-    self.children = [
-      self.bar_inner
-    ]
+    self.children = self.bar_inner
