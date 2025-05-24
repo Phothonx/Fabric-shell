@@ -1,11 +1,13 @@
 import fabric
-
-from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.box import Box
 from fabric.widgets.centerbox import CenterBox
+from fabric.widgets.wayland import WaylandWindow as Window
 
 from modules.datetime import DateTimeWidget
 from modules.workspaces import WorkspacesWidget
+
+from modules.logo import logo
+
 
 class Bar(Window):
   def __init__(self, **kwargs):
@@ -21,7 +23,10 @@ class Bar(Window):
     self.workspaces = WorkspacesWidget()
     self.date_time = DateTimeWidget()
 
+    self.logo = logo
+
     self.left_widgets = [
+      self.logo,
       self.workspaces
     ]
     self.righ_widgets = [

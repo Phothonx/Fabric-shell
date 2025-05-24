@@ -2,8 +2,10 @@ import fabric
 
 from fabric.widgets.wayland import WaylandWindow as Window
 from fabric.widgets.box import Box
+from fabric.hyprland.widgets import ActiveWindow
 
 from modules.controls import VolumeSlider
+
 
 class Notch(Window):
   def __init__(self, **kwargs):
@@ -18,7 +20,9 @@ class Notch(Window):
     )
 
     self.volume_slider = VolumeSlider(parent=self)
+    self.active_window = ActiveWindow(name="hyprland-window")
 
+    self.permanent = [ self.active_window ]
     self.menus = [
       self.volume_slider
     ]
@@ -31,7 +35,7 @@ class Notch(Window):
         Box(
           name = "center-box",
           orientation = "v",
-          children = self.menus
+          children = self.permanent + self.menus
         ),
         Box(name="right-inverted-corner")
       ]
