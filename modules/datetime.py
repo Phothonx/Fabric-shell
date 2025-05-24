@@ -1,7 +1,8 @@
 from fabric.widgets.datetime import DateTime
 
-def dateTime():
-  return DateTime(
-    name = "date-time",
-    formatters = ["%H:%M"]
-  )
+class DateTimeWidget(DateTime):
+  def __init__(self, **kwargs) -> None:
+    super().__init__(
+      name = "date-time",
+      formatter = [ "%H:M" ]
+    )

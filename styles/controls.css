@@ -1,0 +1,24 @@
+#control-slider {
+  background-color: grey;
+  margin: 1em;
+}
+
+#control-slider scale {
+  min-height: 1em;
+}
+
+#control-slider trough {
+  min-height: 1em;
+}
+
+#control-slider slider {
+  color: red;
+
+  min-width: 20px;
+  min-height: 20px;
+}
+
+#control-slider trough highlight {
+  min-height: 1em;
+  background: white;
+}

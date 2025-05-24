@@ -1,0 +1,49 @@
+import fabric
+
+from fabric.widgets.wayland import WaylandWindow as Window
+from fabric.widgets.box import Box
+
+from modules.controls import VolumeSlider
+
+class Notch(Window):
+  def __init__(self, **kwargs):
+    super().__init__(
+      name="notch",
+      layer="top",
+      anchor="top",
+      exclusivity="none",
+      margin="-40px 0 0 0",
+      visible=True,
+      all_visible=True,
+    )
+
+    self.volume_slider = VolumeSlider(parent=self)
+
+    self.menus = [
+      self.volume_slider
+    ]
+
+    self.children = Box(
+      name = "notch-container",
+      orientation = "h",
+      children = [
+        Box(name="left-inverted-corner"),
+        Box(
+          name = "center-box",
+          orientation = "v",
+          children = self.menus
+        ),
+        Box(name="right-inverted-corner")
+      ]
+    )
+
+  def showMenu(self, menu):
+    for other_menu in self.menus:
+      other_menu.set_visible(False)
+      other_menu.add_style_class("hidden")
+    menu.remove_style_class("hidden")
+    menu.set_visible(True)
+
+  def hideMenu(self, menu):
+    menu.add_style_class("hidden")
+    menu.set_visible(False)
