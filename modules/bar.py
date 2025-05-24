@@ -36,11 +36,13 @@ class Bar(Window):
     self.bar_inner = CenterBox(
       name = "bar-inner",
       start_children = Box(
+        spacing=5,
         name = "start-container",
         orientation = "h",
         children = self.left_widgets
       ),
       end_children = Box(
+        spacing=5,
         name = "end-container",
         orientation = "h",
         children = self.righ_widgets

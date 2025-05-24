@@ -7,7 +7,7 @@ if __name__ == "__main__":
   bar = Bar()
   notch = Notch()
 
-  app = Application("fabric-shell", bar, notch)
+  app = Application("fabric-shell", bar, notch, inspect=True)
 
   app.set_stylesheet_from_file(get_relative_path("main.css"))
   app.run()

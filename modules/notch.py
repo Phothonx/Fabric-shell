@@ -5,6 +5,7 @@ from fabric.widgets.box import Box
 from fabric.hyprland.widgets import ActiveWindow
 
 from modules.controls import VolumeSlider
+from modules.activewindow import ActiveWindowText
 
 
 class Notch(Window):
@@ -14,15 +15,15 @@ class Notch(Window):
       layer="top",
       anchor="top",
       exclusivity="none",
-      margin="-40px 0 0 0",
+      margin="-43px 0 0 0",
       visible=True,
       all_visible=True,
     )
 
     self.volume_slider = VolumeSlider(parent=self)
-    self.active_window = ActiveWindow(name="hyprland-window")
+    self.active_window = ActiveWindowText()
 
-    self.permanent = [ self.active_window ]
+    self.permanent_menus = [ self.active_window ]
     self.menus = [
       self.volume_slider
     ]
@@ -35,7 +36,7 @@ class Notch(Window):
         Box(
           name = "center-box",
           orientation = "v",
-          children = self.permanent + self.menus
+          children = self.permanent_menus + self.menus
         ),
         Box(name="right-inverted-corner")
       ]
@@ -45,9 +46,15 @@ class Notch(Window):
     for other_menu in self.menus:
       other_menu.set_visible(False)
       other_menu.add_style_class("hidden")
+    for permanent_menu in self.permanent_menus:
+      permanent_menu.set_visible(False)
+      permanent_menu.add_style_class("hidden")
     menu.remove_style_class("hidden")
     menu.set_visible(True)
 
   def hideMenu(self, menu):
+    for permanent_menu in self.permanent_menus:
+      permanent_menu.set_visible(True)
+      permanent_menu.remove_style_class("hidden")
     menu.add_style_class("hidden")
     menu.set_visible(False)

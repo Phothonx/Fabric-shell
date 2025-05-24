@@ -21,7 +21,6 @@ class VolumeSlider(Scale):
     super().__init__(
       name="control-slider",
       orientation="h",
-      **kwargs,
     )
 
     self.timer = None

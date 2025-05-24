@@ -27,7 +27,18 @@
     forEachSystem = f: lib.genAttrs systems (system: f pkgsFor.${system});
   in {
     devShells = forEachSystem (pkgs: {
-      default = inputs.fabric.devShells.${pkgs.system}.default;
+      default = pkgs.mkShell {
+
+        inputsFrom = [inputs.fabric.devShells.${pkgs.system}.default];
+        packages = with pkgs; [
+          # additional nix packages here
+          geist-font # font
+        ];
+        shellHook = ''
+          export GTK_DEBUG="interactive python config.py"
+        '';
+
+      };
     });
   };
 }
