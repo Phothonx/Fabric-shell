@@ -1,7 +1,8 @@
 from fabric.utils.helpers import get_relative_path
 from fabric.widgets.button import Button
 from fabric.widgets.image import Image
-from modules.launcher import create_launcher
+
+from modules.launcher import Launcher
 
 logo = Button(
     name="logo",
@@ -10,5 +11,5 @@ logo = Button(
         image_file=get_relative_path("../assets/NixOS.png"),
     ),
 )
-
-logo.connect("clicked", lambda button: create_launcher())
+launcher = Launcher()
+logo.connect("clicked", lambda button: launcher.show())
