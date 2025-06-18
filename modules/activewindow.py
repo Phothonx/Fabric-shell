@@ -5,7 +5,7 @@ class ActiveWindowText(ActiveWindow):
     super().__init__(
       name="hyprland-window",
       v_expand=True,
-      h_expand=True,
+      h_expand=False,
       h_align="center",
       v_align="center"
     )

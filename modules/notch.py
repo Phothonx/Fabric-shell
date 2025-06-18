@@ -6,6 +6,7 @@ from fabric.hyprland.widgets import ActiveWindow
 
 from modules.controls import VolumeSlider
 from modules.activewindow import ActiveWindowText
+# from modules.launcher import Launcher
 
 
 class Notch(Window):
@@ -22,10 +23,12 @@ class Notch(Window):
 
     self.volume_slider = VolumeSlider(parent=self)
     self.active_window = ActiveWindowText()
+    # self.launcher = Launcher
 
     self.permanent_menus = [ self.active_window ]
     self.menus = [
       self.volume_slider
+      # self.launcher
     ]
 
     self.children = Box(
